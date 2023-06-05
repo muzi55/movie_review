@@ -65,8 +65,8 @@ window.addEventListener("load", () => {
         // "background-size="cover"></div>
         el(".movie_cards ul").insertAdjacentHTML("beforeend", template);
         els(".movie_cards ul li")[i].addEventListener("click", () => {
-          location.href = "./detail.html";
-          alert(`이 영화의 ID는 ? => ${movies[i].id}`);
+          location.href = `./detail.html?id=${movies[i].id}`;
+          // alert(`이 영화의 ID는 ? => ${movies[i].id}`);
         });
       }
 
