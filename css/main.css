@@ -1,6 +1,11 @@
 :root {
   color: #fff;
   font-family: "Noto Sans KR", sans-serif;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+:root::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .df {
