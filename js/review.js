@@ -140,11 +140,14 @@ review_edit.forEach((e, index) => {
           localStorage.setItem(local[1], [local[0], local[1], local[2], editArea.value, local[4]]);
           console.log(localArr[index]);
           window.location.reload();
-        } else if (editArea.value === "") {
-          alert("내용값이 비어있어 !");
-          return;
         } else if (pass.value === "") {
           alert("비밀번호를 확인해 !");
+          return;
+        } else if (localArr[index][2] !== pass.value) {
+          alert("비밀번호를 확인해 !");
+          return;
+        } else if (editArea.value === "") {
+          alert("내용값이 비어있어 !");
           return;
         }
       });
