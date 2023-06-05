@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="muzi55" />
+    <meta name="description" content="페이지 설명" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1" />
+    <!-- http://ogp.me/ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Muzi_web" />
+    <meta property="og:title" content="표시되어야하는 개체의 제목" />
+    <meta property="og:description" content="페이지 설명" />
+    <meta property="og:image" content="이미지 경로" />
+    <meta property="og:url" content="그래프에서 영구 ID로 사용될 개체의 표준 URL" />
+    <link rel="icon" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./favicon.png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+
+    <title>movie-review</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/review.css" />
+  </head>
+  <body>
+    <section class="movie-review">
+      <h2 class="title">Comment</h2>
+
+      <div class="comment-wrapper">
+        <div class="comment-box">
+          <ul class="comment-item">
+            <li>
+              <div class="content">
+                <div class="info-row df">
+                  <span class="user-info">이름</span>
+                  <div class="right">
+                    <time class="review_time" datetime="2023-06-05T00:55:38.000Z">시간,날자</time>
+                    <a class="review-edit" href="#">수정</a>
+                    <a href="#">삭제</a>
+                  </div>
+                </div>
+                <div class="message">
+                  <p>텍스트</p>
+                </div>
+              </div>
+            </li>
+            <!--  -->
+            <li class="movie-review--edit">
+              <div class="content">
+                <div class="info-row df">
+                  <span class="user-info">이름</span>
+                  <span class="edit-pass">
+                    <label for="edit_user--pass">비밀번호</label>
+                    <input type="password" id="edit_user--pass" maxlength="4" placeholder="****" autocomplete="current-password" />
+                  </span>
+                </div>
+                <div class="message">
+                  <textarea name="#" class="movie-review--area" cols="30" rows="10"></textarea>
+                  <button class="movie-review--btn reply-form-textarea">수정</button>
+                </div>
+              </div>
+            </li>
+            <!--  -->
+          </ul>
+        </div>
+        <div class="reply-form__container">
+          <form action="#" id="review" method="POST">
+            <div class="reply-form__info df">
+              <input type="text" class="dfce" id="user-name" maxlength="6" placeholder="아이디" autocomplete="username" />
+              <label class="hidden" for="user-name">아이디</label>
+              <input type="password" class="dfce" id="user-pass" maxlength="4" placeholder="****" autocomplete="current-password" />
+              <label class="hidden" for="user-pass">패스워드</label>
+            </div>
+
+            <div class="reply-form-textarea-wrapper">
+              <textarea name="" id="reply-form-textarea" cols="30" rows="10"></textarea>
+              <label for="reply-form-textarea hidden" hidden>입력</label>
+              <button id="up_review" class="reply-form-textarea">입력</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <script lang="javascript" src="./js/review.js" defer></script>
+  </body>
+</html>

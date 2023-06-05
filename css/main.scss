@@ -1,6 +1,16 @@
 :root{
     color:#fff;
     font-family: 'Noto Sans KR', sans-serif;
+
+}
+.df {
+    display: flex;
+}
+
+.dfce{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .hidden {
     position: absolute;

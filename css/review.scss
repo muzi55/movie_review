@@ -1,0 +1,214 @@
+$gray: #636363;
+$bg : #1a1c20;
+:root{
+    background: $bg;
+    // background: url('https://image.yes24.com/goods/71854072/XL') no-repeat;
+    // background-attachment: fixed;
+}
+
+.reply-form-textarea {
+    position: absolute;
+    display: block;
+    color:#fff;
+    bottom: 10%;
+    right: 5%;
+    border: 1px solid $gray;
+    border-radius: 5px;
+    width: 60px;
+    height: 40px;
+    // padding: 10px 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color:#000;
+    &:hover{
+        background-color: rgba(0,0,0,0.2);
+    }
+}
+.movie-review {
+    & h2{
+        max-width: 95%;
+    }
+    margin: 10px auto;
+    max-width: 80%;
+    // border:1px solid #060606;
+    // border-radius: 3px;
+    // background: red;
+    background: rgba(255,255,255,.2);
+    background: none;
+    border-top: 1px solid $gray;
+    padding-bottom: 10px;
+
+    & .title{
+        margin-top: 10px;
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+    }
+
+    & .comment-wrapper{
+        max-width: 95%;
+        margin: 0 auto;
+        & .comment-item{
+            margin-bottom: 20px;
+            & li{
+                margin-bottom: 10px;
+                &:nth-child(2n){
+                    background: rgba(0,0,0,0.5);
+                }
+            }
+            & .content{
+                background: rgba(0,0,0,0.2);
+                border: 1px solid $gray;
+                & > div {
+                    padding: 8px 10px;
+                }
+                & .info-row{
+                    justify-content: space-between;
+                    border-bottom: 1px dashed $gray;
+                    & .user-info{
+                        &:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                    & .edit-pass{
+                        // background: red;
+                        // width: 60%;
+                        &>label {
+                        //   background: red;
+                          font-size: 12px;  
+                        }
+                        & #edit_user--pass{
+                            height: 20px;
+                            box-sizing: border-box;
+                            width: 80px;
+                            padding-left: 10px;
+                            font-size: 16px;
+                        }
+                    }
+                    & .right > a{
+                        &::before{
+                            content:'|';
+                            margin: 0 5px;
+
+                        }
+                        &:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                & .message p{
+                }
+            }
+
+            & li.movie-review--edit{
+                & .message{
+                    position: relative;
+                    padding: 0;
+                    & .movie-review--area{
+                        // position: absolute;
+                        box-sizing: border-box;
+                        // font-size: 1.6rem;
+                        font-size: 12px;
+                        display: block;
+                        padding: 10px;
+                        width: 100%;
+                        height: auto;
+                        resize: none;
+                        border: none;
+                        letter-spacing: 1.5px;
+                    }
+                    & .movie-review--btn{
+
+                    }
+                }
+              
+                
+            }
+        
+        }
+        & .reply-form__container {
+            border:1px solid $gray;
+            & .reply-form__info {
+                border-bottom: 1px dashed $gray;
+                padding: 8px 10px;                
+                & input {
+                    border-radius: 3px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    max-width: 120px;
+                    display: block;
+                    background: inherit;
+                    border: 1px solid $gray;
+                    height: 24px;
+                    color:#fff;
+                    margin-right: 10px;
+                    padding-left : 10px;
+                    &:nth-child(3){
+                        margin-right: 0;
+                    }
+                    &::placeholder{
+                        color:#fff;
+                    }
+                }
+                & #user-name{
+                }
+                & #user-pass{
+                    background: inherit;
+                }
+            }
+
+            & .reply-form-textarea-wrapper{
+                position: relative;
+                & #reply-form-textarea{
+                    // position: absolute;
+                    box-sizing: border-box;
+                    // font-size: 1.6rem;
+                    font-size: 12px;
+                    display: block;
+                    padding: 10px;
+                    width: 100%;
+                    height: auto;
+                    resize: none;
+                    border: none;
+                    letter-spacing: 1.5px;
+                    &:focus {
+                        outline: none;
+                    }
+
+                }
+                & .reply-form-textarea{
+                    // position: absolute;
+                    // display: block;
+                    // color:#fff;
+                    // bottom: 10%;
+                    // right: 5%;
+                    // border: 1px solid $gray;
+                    // border-radius: 5px;
+                    // width: 60px;
+                    // height: 40px;
+                    // // padding: 10px 22px;
+                    // display: flex;
+                    // justify-content: center;
+                    // align-items: center;
+                    // cursor: pointer;
+                    // transition: background-color 0.2s;
+                    // color:#000;
+                    &:hover{
+                        // background-color: rgba(0,0,0,0.2);
+                    }
+                }
+            }
+        }
+    }
+
+    & .info-row{
+        // padding: 6px 0px;
+        // border-top: 1px solid #060606;
+        // border-bottom: 1px solid #060606;
+    }
+
+
+}
