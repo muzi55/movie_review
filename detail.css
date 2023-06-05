@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: "KBO-Dia-Gothic_bold";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff")
     format("woff");
@@ -11,9 +11,13 @@
     format("woff2");
   font-weight: normal;
   font-style: normal;
+} */
+:root {
+  font-family: "Noto Sans KR", sans-serif;
 }
-
 * {
+  background: #000;
+  color: #efe;
   margin: 0;
   padding: 0;
   /* background: #000; */
@@ -25,9 +29,9 @@
 }
 #homeBtn {
   font-family: "KBO-Dia-Gothic_bold";
-  border: 4px dotted #000;
+  border: 4px dotted #efe;
   /* color: #efe; */
-  background: #efe;
+  background: #000;
   cursor: pointer;
   margin: 20px;
 }
@@ -51,17 +55,17 @@
   margin-bottom: 10px;
 }
 .genre {
-  background-color: #efe;
-  border: 2px solid #000;
+  background-color: #000;
+  border: 2px solid #efe;
   margin-right: 7px;
   border-radius: 6px;
   padding: 2px;
 }
 .video {
   font-family: "KOTRAHOPE";
-  font-size: 35px;
-  background-color: #000;
-  color: #efe;
+  font-size: 25px;
+  background-color: #efe;
+  color: #000;
   width: 250px;
   height: 70px;
   text-align: center;

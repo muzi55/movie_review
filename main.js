@@ -57,6 +57,7 @@ window.addEventListener("load", () => {
             <img src="https://image.tmdb.org/t/p/w300${movies[i].backdrop_path}" alt="영화 포스트">
           </div>
           <h3>${movies[i].title}</h3>
+          <br>
         <p class="description">${movies[i].overview}</p>
       </li>
       `;

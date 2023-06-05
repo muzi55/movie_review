@@ -27,7 +27,7 @@ fetch("https://api.themoviedb.org/3/movie/" + movieId, options)
                             </div>
                             <button class="video">예고편 미리보기</button>
                             <div class="overview">${res.overview}</div>
-                            <div class="rating">${res.vote_average}</div>
+                            <div class="rating"> ${"평점 : " + res.vote_average}</div>
                         </div>
                         <div class="posterWrapper">
                         <img src="https://image.tmdb.org/t/p/w500${
