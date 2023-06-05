@@ -58,6 +58,10 @@ $bg : #1a1c20;
                     background: rgba(0,0,0,0.5);
                 }
             }
+
+            // & .content,.movie-review--textarea{
+            //     margin-top: 5px;
+            // }
             & .content{
                 background: rgba(0,0,0,0.2);
                 border: 1px solid $gray;
@@ -87,6 +91,9 @@ $bg : #1a1c20;
                             font-size: 16px;
                         }
                     }
+                    & .right {
+                        position: relative;
+                    }
                     & .right > a{
                         &::before{
                             content:'|';
@@ -96,13 +103,59 @@ $bg : #1a1c20;
                         &:hover{
                             text-decoration: underline;
                         }
+                        &:last-child{
+                            position: relative;
+
+                            
+                        }
                     }
+                }
+                & .cmt_delpw_box {
+                    display: flex;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background: $bg;
+                    transform: translate(100%,120%);
+                    & .user-pass__del{
+                        width: 60px;
+                        padding: 0;
+                        padding-left: 10px;
+                        border:1px solid $gray;
+                        border-radius: 2px;
+                        display: block;
+                    }
+                    & .close_btn{
+                        background: inherit;
+                        border: 1px solid $gray;
+                        color:#fff;
+                        cursor: pointer;
+                        // display: flex;
+                        // justify-content: center;
+                        // align-items: center;
+                        &:hover{
+                            background: rgba(255,255,255,.1);
+                        }
+                    }
+                    &>em {
+                        height: 22px;
+                        
+                    }
+                    &> em > img{
+                        cursor: pointer;
+                        display: block;
+                        width: 22px;
+                        height: 22px;
+
+                    }
+
+
                 }
                 & .message p{
                 }
             }
 
-            & li.movie-review--edit{
+            & .movie-review--textarea{
                 & .message{
                     position: relative;
                     padding: 0;
@@ -209,6 +262,7 @@ $bg : #1a1c20;
         // border-top: 1px solid #060606;
         // border-bottom: 1px solid #060606;
     }
+    
 
 
 }

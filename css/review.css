@@ -76,6 +76,9 @@
   padding-left: 10px;
   font-size: 16px;
 }
+.movie-review .comment-wrapper .comment-item .content .info-row .right {
+  position: relative;
+}
 .movie-review .comment-wrapper .comment-item .content .info-row .right > a::before {
   content: "|";
   margin: 0 5px;
@@ -83,11 +86,48 @@
 .movie-review .comment-wrapper .comment-item .content .info-row .right > a:hover {
   text-decoration: underline;
 }
-.movie-review .comment-wrapper .comment-item li.movie-review--edit .message {
+.movie-review .comment-wrapper .comment-item .content .info-row .right > a:last-child {
+  position: relative;
+}
+.movie-review .comment-wrapper .comment-item .content .cmt_delpw_box {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #1a1c20;
+  transform: translate(100%, 120%);
+}
+.movie-review .comment-wrapper .comment-item .content .cmt_delpw_box .user-pass__del {
+  width: 60px;
+  padding: 0;
+  padding-left: 10px;
+  border: 1px solid #636363;
+  border-radius: 2px;
+  display: block;
+}
+.movie-review .comment-wrapper .comment-item .content .cmt_delpw_box .close_btn {
+  background: inherit;
+  border: 1px solid #636363;
+  color: #fff;
+  cursor: pointer;
+}
+.movie-review .comment-wrapper .comment-item .content .cmt_delpw_box .close_btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.movie-review .comment-wrapper .comment-item .content .cmt_delpw_box > em {
+  height: 22px;
+}
+.movie-review .comment-wrapper .comment-item .content .cmt_delpw_box > em > img {
+  cursor: pointer;
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+.movie-review .comment-wrapper .comment-item .movie-review--textarea .message {
   position: relative;
   padding: 0;
 }
-.movie-review .comment-wrapper .comment-item li.movie-review--edit .message .movie-review--area {
+.movie-review .comment-wrapper .comment-item .movie-review--textarea .message .movie-review--area {
   box-sizing: border-box;
   font-size: 12px;
   display: block;

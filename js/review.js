@@ -3,6 +3,7 @@ const user_pass = document.querySelector("#user-pass");
 const user_text = document.querySelector("#reply-form-textarea");
 const user_btn = document.querySelector("#up_review");
 const user_day = document.querySelector('[datetime="2023-06-05T00:55:38.000Z"]');
+// const edit_pass = document.querySelector("#edit_user--pass");
 
 // 로칼스토리지에서 가져와서 뿌려주기
 let localArr = [];
@@ -25,18 +26,18 @@ localArr = localArr.sort(function compare(a, b) {
 localArr.forEach((e) => {
   e.join().split(",");
   const template = `
-    <li>
+    <li class="comment-edit">
         <div class="content">
             <div class="info-row df">
-            <span class="user-info">${e[3]}</span>
+            <span class="user-info">${e[1]}</span>
             <div class="right">
                 <time class="review_time" datetime="${e[0]}">${e[0]}</time>
-                <a class="review-modify" href="#">수정</a>
+                <a class="review-edit" href="#">수정</a>
                 <a class="review-delly" href="#">삭제</a>
             </div>
             </div>
             <div class="message">
-            <p>${e[1]}</p>
+            <p>${e[3]}</p>
             </div>
         </div>
     </li>
@@ -90,8 +91,124 @@ user_btn.addEventListener("click", (e) => {
 
 const review_edit = document.querySelectorAll(".review-edit");
 const review_delly = document.querySelectorAll(".review-delly");
+const review_edit_list = document.querySelectorAll(".comment-edit");
 
-review_edit.forEach((e) => {
-  // e.preventDefault();
-  e.addEventListener("click", (el) => {});
+review_delly.forEach((el, index) => {
+  let count = true;
+  el.addEventListener("click", (e) => {
+    const editLocal = localArr[index].join().split(",");
+    const del_pass = prompt("비밀번호를 입력해주쎄여");
+    // const temp = `
+    // <div class="cmt_delpw_box">
+    //   <input type="password" maxlength="4" name="#" class="user-pass__del" placeholder="****" />
+    //   <button class="close_btn">확인</button>
+    //   <em><img src="https://i.postimg.cc/nLGmhPyB/close-btn.png" alt="취소" /></em>
+    // </div>`;
+
+    // const aa = prompt("비밀번호를 써주세여");
+    // console.log(aa);
+
+    // if(aa === ){}
+
+    if (editLocal[2] === del_pass) {
+      localStorage.removeItem(editLocal[1]);
+    } else {
+      alert("비밀번호를 확인해주세여 !!");
+    }
+    // if (true) {
+
+    // e.
+    // e.target.parentElement.innerHTML = temp;
+    // }
+  });
 });
+
+// 비밀번호 검증
+function passVerfication(e) {}
+// 수정 이벤트
+review_edit.forEach((e, index) => {
+  let count = true;
+  e.addEventListener("click", (el) => {
+    const template = `
+    <div class="content movie-review--textarea">
+      <div class="info-row df">
+        <span class="user-info">이름</span>
+        <span class="edit-pass">
+          <label>비밀번호
+          <input type="password" class="edit_user--pass" maxlength="4" placeholder="****" autocomplete="current-password" />
+          </label>
+        </span>
+      </div>
+      <div class="message">
+        <textarea name="#" class="movie-review--area" cols="30" rows="10"></textarea>
+        <button class="movie-review--btn reply-form-textarea">수정</button>
+      </div>
+    </div>`;
+
+    if (count) {
+      review_edit_list[index].insertAdjacentHTML("beforeend", template);
+      count = !count;
+      const btn = document.querySelector(".movie-review--btn");
+      const pass = document.querySelector(".edit_user--pass");
+
+      btn.addEventListener("click", (e) => {
+        if (localArr[index][2] === pass.value) {
+          const editArea = document.querySelector(".movie-review--area");
+
+          // editArea.value
+          const local = localArr[index].join().split(",");
+          // console.log(local);
+          // console.log(local[0]);
+          // console.log(local[1]);
+          // console.log(local[2]);
+          // console.log(local[3]);
+          // console.log(local[4]);
+
+          localStorage.setItem(local[1], [local[0], local[1], local[2], editArea.value, local[4]]);
+          window.location.reload();
+
+          // e.target.parentElement.parentElement.parentElement.remove();
+          // console.log(localArr[index][1]);
+
+          // 삭제
+          // localStorage.removeItem(localArr[index][1]);
+
+          // console.log(review_edit_list[index]);
+        } else {
+          alert("비밀번호를 확인해!");
+        }
+      });
+    } else {
+      e.parentNode.parentElement.parentElement.nextElementSibling.remove();
+      count = !count;
+      // del_area[index].remove();
+      // console.log(del_area);
+      // review_edit_list[index].remove();
+    }
+
+    // if (count) {
+    //   count = !count;
+    //   console.log(1, count);
+    //   return;
+    // }
+
+    // if (!count) {
+    // const review_editnext = document.querySelectorAll(".movie-review--textarea");
+    //   console.log(review_editnext[index]);
+    //   review_editnext[index].remove();
+    //   // console.log(review_editnext[index]);
+    //   // review_edit_list[index].remove;
+    //   count = !count;
+    //   console.log(2, count);
+    // }
+    // console.log(count);
+
+    // if (edit_pass.value === localArr[index][2]) {
+    //   console.log(1);
+    // } else {
+    //   ("");
+    // }
+  });
+});
+
+// 버튼 수정
