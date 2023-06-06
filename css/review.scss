@@ -55,7 +55,7 @@ $bg : #1a1c20;
             & li{
                 margin-bottom: 10px;
                 &:nth-child(2n){
-                    background: rgba(0,0,0,0.5);
+                    background: rgba(0,0,0,0.3);
                 }
             }
 
@@ -263,6 +263,8 @@ $bg : #1a1c20;
         // border-bottom: 1px solid #060606;
     }
     
+}
 
-
+@media (max-width: 890px) {
+    
 }

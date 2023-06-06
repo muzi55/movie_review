@@ -2,7 +2,9 @@ const user_id = document.querySelector("#user-name");
 const user_pass = document.querySelector("#user-pass");
 const user_text = document.querySelector("#reply-form-textarea");
 const user_btn = document.querySelector("#up_review");
-const user_day = document.querySelector('[datetime="2023-06-05T00:55:38.000Z"]');
+const user_day = document.querySelector(
+  '[datetime="2023-06-05T00:55:38.000Z"]'
+);
 const date_time = new Date();
 const get_day2 = date_time.toLocaleString();
 // const edit_pass = document.querySelector("#edit_user--pass");
@@ -76,7 +78,13 @@ function user_check(id, pass, text) {
   }
 
   // 조건 완료하면 아이템스토리지에 추가
-  localStorage.setItem(user_id.value, [get_day2, user_id.value, user_pass.value, user_text.value, get_day2]);
+  localStorage.setItem(user_id.value, [
+    get_day2,
+    user_id.value,
+    user_pass.value,
+    user_text.value,
+    get_day2,
+  ]);
   window.location.reload();
 }
 
@@ -95,12 +103,12 @@ review_delly.forEach((el, index) => {
   let count = true;
   el.addEventListener("click", (e) => {
     const editLocal = localArr[index].join().split(",");
-    const del_pass = prompt("비밀번호를 입력해주쎄여");
+    const del_pass = prompt("비밀번호를 입력해 !");
 
     if (editLocal[2] === del_pass) {
       localStorage.removeItem(editLocal[1]);
     } else {
-      alert("비밀번호를 확인해주세여 !!");
+      alert("비밀번호를 확인해 !");
     }
   });
 });
@@ -137,7 +145,13 @@ review_edit.forEach((e, index) => {
         if (localArr[index][2] === pass.value) {
           const local = localArr[index].join().split(",");
 
-          localStorage.setItem(local[1], [local[0], local[1], local[2], editArea.value, local[4]]);
+          localStorage.setItem(local[1], [
+            local[0],
+            local[1],
+            local[2],
+            editArea.value,
+            local[4],
+          ]);
           console.log(localArr[index]);
           window.location.reload();
         } else if (pass.value === "") {
