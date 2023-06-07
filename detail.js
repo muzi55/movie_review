@@ -18,22 +18,27 @@ fetch("https://api.themoviedb.org/3/movie/" + movieId, options)
   .then((res) => {
     console.log(res);
     let template = `
-                        <div class="movieWrapper">
-                            <div class="title"><h1>${res.title}</h1></div>
-                            <div class="genres">
-                            ${((item) => {
-                              return item.map((x) => `<span class="genre">${x.name}</span>`).join('');
-                            })(res.genres)}
-                            </div>
-                            <button class="video">예고편 미리보기</button>
-                            <div class="overview">${res.overview}</div>
-                            <div class="rating"> ${"평점 : " + res.vote_average}</div>
-                        </div>
-                        <div class="posterWrapper">
-                        <img src="https://image.tmdb.org/t/p/w500${
-                          res.backdrop_path
-                        }" alt="영화 포스트">
-                    </div>`;
+        <div class="movieWrapper">
+            <div class="title"><h1>${res.title}</h1></div>
+            <div class="genres">
+            ${((item) => {
+              return item
+                .map((x) => `<span class="genre">${x.name}</span>`)
+                .join("");
+            })(res.genres)}
+            </div>
+            <button class="video">예고편 미리보기</button>
+            <div class="overview">${res.overview}</div>
+            <br/>
+            <div class="rating"> ${
+              "평점 : " + res.vote_average.toFixed(1)
+            }</div>
+        </div>
+        <div class="posterWrapper">
+        <img src="https://image.tmdb.org/t/p/w500${
+          res.backdrop_path
+        }" alt="영화 포스트">
+    </div>`;
     document
       .getElementById("wrapperId")
       .insertAdjacentHTML("beforeend", template);
