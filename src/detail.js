@@ -1,8 +1,8 @@
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get("id");
 const movieContainer = document.querySelector(".movie-container");
-const movieTitle = document.querySelector(".movie-title");
 const url = `https://api.themoviedb.org/3/movie/${movieId}`;
+const likes = JSON.parse(sessionStorage.getItem("likes"));
 
 const options = {
   method: "GET",
@@ -43,6 +43,7 @@ const makeTemp = async () => {
   const movies = await movieFetch();
   const movieData = movies[0];
   let { title, genres, production_companies, vote_average, overview, poster_path } = movieData;
+
   let template = `
   <div class="movieWrapper">
       <div class="title"><h1>${title}</h1></div>
@@ -53,7 +54,9 @@ const makeTemp = async () => {
       </div>
       <div class="player">
       <button class="video" onclick="clickBtn()"><i class="fa-sharp fa-solid fa-play play-icon"></i>예고편 시청하기</button>
-      <i class="fa-regular fa-heart heart-icon" onclick="clickHeart()"></i>
+      <i class="fa-regular fa-heart heart-icon${
+        likes.includes(movieId) ? " red-heart" : " "
+      }" onclick="clickHeart()"></i>
       </div>
       <div class="movieInfo">
         <h3 class="director">제작 : 
@@ -73,9 +76,18 @@ const makeTemp = async () => {
   document.getElementById("wrapperId").insertAdjacentHTML("beforeend", template);
 };
 
-const clickHeart = () => {
+///하트
+const clickHeart = async () => {
+  let likesMovie = JSON.parse(sessionStorage.getItem("likes"));
   let heartIcon = document.querySelector(".heart-icon");
-  heartIcon.classList.toggle("red-heart");
+  if (likesMovie.includes(movieId)) {
+    likesMovie.splice(likesMovie.indexOf(movieId), 1);
+    heartIcon.classList.remove("red-heart");
+  } else {
+    likesMovie.push(movieId);
+    heartIcon.classList.add("red-heart");
+  }
+  sessionStorage.setItem("likes", JSON.stringify(likesMovie));
 };
 
 makeTemp().then(() => {
