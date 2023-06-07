@@ -90,16 +90,19 @@ const clickHeart = async () => {
   sessionStorage.setItem("likes", JSON.stringify(likesMovie));
 };
 
+//댓글입력창 Review 버튼으로 감싸기
+let count = true;
 makeTemp().then(() => {
-  //댓글입력창 Review 버튼으로 감싸기
   const $writeReviewBtn = document.querySelector(".writeReviewBtn");
   const $commentInputContainer = document.querySelector(".comment_input_container");
-
   $writeReviewBtn.addEventListener("click", () => {
-    if ($commentInputContainer.style.display === "none") {
+    // console.log(count);
+    if (count) {
       $commentInputContainer.style.display = "block";
+      return (count = !count);
     } else {
       $commentInputContainer.style.display = "none";
+      return (count = !count);
     }
   });
 });
