@@ -42,14 +42,7 @@ const clickBtn = async () => {
 const makeTemp = async () => {
   const movies = await movieFetch();
   const movieData = movies[0];
-  let {
-    title,
-    genres,
-    production_companies,
-    vote_average,
-    overview,
-    poster_path,
-  } = movieData;
+  let { title, genres, production_companies, vote_average, overview, poster_path } = movieData;
   let template = `
   <div class="movieWrapper">
       <div class="title"><h1>${title}</h1></div>
@@ -65,20 +58,19 @@ const makeTemp = async () => {
       <div class="movieInfo">
         <h3 class="director">제작 : 
 
-        ${
-          production_companies[0] ? movieData.production_companies[0].name : ""
-        }</h3>
+        ${production_companies[0] ? movieData.production_companies[0].name : ""}</h3>
         <h3>평점 : ${vote_average.toFixed(1)}</h3>
         <h3 class="overview">${overview}</h3>
         <h3 class="rating"></h3>
       </div>
+      <button class="writeReviewBtn">Review</button>
   </div>
   <div class="posterWrapper">
   <img class="posterImage" src="https://image.tmdb.org/t/p/w400${poster_path}" alt="영화 포스트">
-</div>`;
-  document
-    .getElementById("wrapperId")
-    .insertAdjacentHTML("beforeend", template);
+
+</div>
+`;
+  document.getElementById("wrapperId").insertAdjacentHTML("beforeend", template);
 };
 
 const clickHeart = () => {
@@ -86,4 +78,16 @@ const clickHeart = () => {
   heartIcon.classList.toggle("red-heart");
 };
 
-makeTemp();
+makeTemp().then(() => {
+  //댓글입력창 Review 버튼으로 감싸기
+  const $writeReviewBtn = document.querySelector(".writeReviewBtn");
+  const $commentInputContainer = document.querySelector(".comment_input_container");
+
+  $writeReviewBtn.addEventListener("click", () => {
+    if ($commentInputContainer.style.display === "none") {
+      $commentInputContainer.style.display = "block";
+    } else {
+      $commentInputContainer.style.display = "none";
+    }
+  });
+});

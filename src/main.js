@@ -1,15 +1,27 @@
 window.addEventListener("load", () => {
+  const handleLocationChange = (e) => {
+    const { href } = e.detail;
+    console.log(href);
+    //* 주소변경
+    window.history.pushState(undefined, "타이틀", href);
+    renderContents();
+  };
+
+  //* locationchange 이벤트리스너
+  window.addEventListener("locationchange", handleLocationChange);
+
+  // road focus
+  window.onload = function () {
+    el("#search").focus();
+  };
+
   // 선택자 함수
 
   function els(selector, context) {
     if (typeof selector !== "string" || selector.trim().length === 0) {
       return null;
     }
-    context = !context
-      ? document
-      : context.nodeType === 1
-      ? context
-      : el(String(context));
+    context = !context ? document : context.nodeType === 1 ? context : el(String(context));
     return context.querySelectorAll(selector);
   }
 
@@ -17,18 +29,9 @@ window.addEventListener("load", () => {
     if (typeof selector !== "string" || selector.trim().length === 0) {
       return null;
     }
-    context = !context
-      ? document
-      : context.nodeType === 1
-      ? context
-      : el(String(context));
+    context = !context ? document : context.nodeType === 1 ? context : el(String(context));
     return context.querySelector(selector);
   }
-
-  // road focus
-  window.onload = function () {
-    el("#search").focus();
-  };
 
   // api
   const options = {
@@ -40,10 +43,7 @@ window.addEventListener("load", () => {
     },
   };
 
-  fetch(
-    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
-    options
-  )
+  fetch("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1", options)
     .then((response) => response.json())
     .then((response) => {
       let movies = response.results;
@@ -63,7 +63,9 @@ window.addEventListener("load", () => {
         // <div class="movie_img" style=
         // "background: url('https://image.tmdb.org/t/p/w300${movies[i].backdrop_path}') bottom center"
         // "background-size="cover"></div>
+
         el(".movie_cards ul").insertAdjacentHTML("beforeend", template);
+
         els(".movie_cards ul li")[i].addEventListener("click", () => {
           window.location.href = `detail.html?id=${movies[i].id}`;
         });
@@ -76,17 +78,10 @@ window.addEventListener("load", () => {
         return average_rating;
       });
 
-      const avg = average_rating.reduce(
-        (accumulator, current, index, array) => {
-          return index === array.length - 1
-            ? (accumulator + current) / array.length
-            : accumulator + current;
-        },
-        0
-      );
-      el(
-        ".last_activity ul li:nth-child(1)"
-      ).innerText = `영화 평균 점수 ${avg}`;
+      const avg = average_rating.reduce((accumulator, current, index, array) => {
+        return index === array.length - 1 ? (accumulator + current) / array.length : accumulator + current;
+      }, 0);
+      el(".last_activity ul li:nth-child(1)").innerText = `영화 평균 점수 ${avg}`;
     })
 
     .catch((err) => console.error(err));

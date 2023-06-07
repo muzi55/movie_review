@@ -4,14 +4,30 @@ window.onload = function () {
   const $write_input = document.querySelector(".write_input");
   const $user_name = document.querySelector(".user_name");
   const $user_password = document.querySelector(".user_password");
+  const $like_sort = document.querySelector(".like_sort");
+  const $time_sort = document.querySelector(".time_sort");
+
+  let urlParams = new URLSearchParams(window.location.search);
+  let movieId = urlParams.get("id");
+
   let selectId = null;
   let method = "submit";
-
+  let sortWay = "like";
   function initInput() {
     $write_input.value = null;
     $user_name.value = null;
     $user_password.value = null;
   }
+
+  $like_sort.addEventListener("click", () => {
+    sortWay = "like";
+    getReviews();
+  });
+
+  $time_sort.addEventListener("click", () => {
+    sortWay = "time";
+    getReviews();
+  });
 
   // 댓글 입력창 기능 구현
   $_content.addEventListener("submit", (event) => {
@@ -23,14 +39,15 @@ window.onload = function () {
       let name = $user_name.value;
       let password = $user_password.value;
 
-      if (password.length < 4)
-        return alert("비밀번호는 최소 4글자가 되어야 합니다.");
+      if (password.length < 4) return alert("비밀번호는 최소 4글자가 되어야 합니다.");
 
       const obj = {
+        likeCount: 0,
         name,
         text,
         password,
         date: date.toLocaleString("ko-kr"),
+        movieId,
       };
       const objString = JSON.stringify(obj);
       localStorage.setItem(`${name}`, objString);
@@ -68,19 +85,41 @@ window.onload = function () {
     }
 
     // 데이터 정렬 및 렌더링
+    // 영화 ID 값 필터링
+    reviews = reviews.filter((review) => {
+      urlParams = new URLSearchParams(window.location.search);
+      movieId = urlParams.get("id");
+      return review.movieId === movieId;
+    });
+
+    if (reviews.length < 2) {
+      document.querySelector(".sort").classList.add("hide");
+    } else {
+      document.querySelector(".sort").classList.remove("hide");
+    }
+
+    let sort = "";
+    if (sortWay === "like") sort = "likeCount";
+    else if (sortWay === "time") sort = "date";
+
+    reviews = reviews.sort((a, b) => {
+      if (a[`${sort}`] < b[`${sort}`]) return 1;
+      else if (a[`${sort}`] === b[`${sort}`]) return 0;
+      else if (a[`${sort}`] > b[`${sort}`]) return -1;
+    });
+
     $item_wrapper.innerHTML = reviews
-      .sort((a, b) => {
-        if (a.date < b.date) return 1;
-        else if (a.date === b.date) return 0;
-        else if (a.date > b.date) return -1;
-      })
       .map((review) => {
         return `<li class="review_card">
                       <div class="review_content">${review.text}</div>
-                      <img data-id="${review.name}"class="close_icon" src="x.png" alt="">
-                      <img data-id="${review.name}"class="edit_icon" src="edit.png" alt="">
+                      <img data-id="${review.name}"class="close_icon" src="assets/X.png" alt="">
+                      <img data-id="${review.name}"class="edit_icon" src="assets/edit.png" alt="">
                       <dl class="upload_info">
                         <dd>${review.name}</dd>
+                        <div class="like">
+                        <img data-id="${review.name}"class="like_icon" src="assets/like.png" alt="">
+                        <p class="like_count">${review.likeCount}</p>
+                        </div>
                         <dd>${review.date}</dd>
                       </dl>
                     </li>`;
@@ -88,6 +127,7 @@ window.onload = function () {
       .join("");
     deleteReview();
     editReview();
+    likeReview();
   }
 
   // 삭제 기능
@@ -97,16 +137,11 @@ window.onload = function () {
     $close_icon.forEach((icon) => {
       icon.addEventListener("click", (e) => {
         const selectId = e.currentTarget.dataset.id;
-        const deletePw = prompt(
-          "삭제를 원하시면 해당 비밀번호를 입력하세요",
-          ""
-        );
+        const deletePw = prompt("삭제를 원하시면 해당 비밀번호를 입력하세요", "");
 
         const data = JSON.parse(localStorage.getItem(selectId));
         if (data.password === deletePw) {
-          confirm("정말로 삭제하시겠습니까?")
-            ? localStorage.removeItem(selectId)
-            : 0;
+          confirm("정말로 삭제하시겠습니까?") ? localStorage.removeItem(selectId) : 0;
           getReviews();
         } else if (data.password !== deletePw && deletePw.length !== 0) {
           alert("비밀번호가 틀립니다.");
@@ -133,20 +168,20 @@ window.onload = function () {
     });
   }
 
+  // 좋아요 기능
+  function likeReview() {
+    const $like_icon = document.querySelectorAll(".like_icon");
+    $like_icon.forEach((icon) => {
+      icon.addEventListener("click", (e) => {
+        selectId = e.currentTarget.dataset.id;
+        const data = JSON.parse(localStorage.getItem(selectId));
+        data.likeCount++;
+        localStorage.setItem(selectId, JSON.stringify(data));
+        getReviews();
+      });
+    });
+  }
   getReviews();
-  //댓글입력창 Review 버튼으로 감싸기
-  const $writeReviewBtn = document.querySelector(".writeReviewBtn");
-  const $commentInputContainer = document.querySelector(
-    ".comment_input_container"
-  );
-
-  $writeReviewBtn.addEventListener("click", () => {
-    if ($commentInputContainer.style.display === "none") {
-      $commentInputContainer.style.display = "block";
-    } else {
-      $commentInputContainer.style.display = "none";
-    }
-  });
 };
 
 //페이지 상단이동
