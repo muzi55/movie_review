@@ -152,6 +152,8 @@ window.onload = function () {
       icon.addEventListener("click", (e) => {
         $delUserPass.classList.remove("hide");
         const selectId = e.currentTarget.dataset.id;
+
+        console.log(selectId);
         document
           .querySelector(".material-symbols-outlined")
           .addEventListener("click", closeFn);
@@ -161,9 +163,10 @@ window.onload = function () {
           .addEventListener("click", closeFn);
 
         deleteBtn.addEventListener("click", () => {
-          const data = JSON.parse(localStorage.getItem(selectId));
           const del__userPass = document.querySelector("#user-del__pass");
-          if (data.password === del__userPass.value) {
+          const data = JSON.parse(localStorage.getItem(selectId));
+          console.log(data, del__userPass.value);
+          if (data && data.password === del__userPass.value) {
             if (confirm("정말로 삭제하시겠습니까?")) {
               localStorage.removeItem(selectId);
               alert("삭제되었습니다.");
@@ -173,10 +176,7 @@ window.onload = function () {
             $delUserPass.classList.add("hide");
             del__userPass.value = null;
             getReviews();
-          } else if (
-            data.password !== del__userPass.value &&
-            del__userPass.value.length !== 0
-          ) {
+          } else if (del__userPass.value.length !== 0) {
             alert("비밀번호가 틀립니다.");
             del__userPass.value = null;
           }
